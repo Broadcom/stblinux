@@ -7,7 +7,7 @@
 /dts-v1/;
 
 #include "bcm47094.dtsi"
-#include "bcm5301x-nand-cs0-bch8.dtsi"
+#include "bcm5301x-nand-cs0-bch1.dtsi"
 
 / {
 	compatible = "linksys,panamera", "brcm,bcm47094", "brcm,bcm4708";
@@ -32,5 +32,100 @@
 			linux,code = <KEY_WPS_BUTTON>;
 			gpios = <&chipcommon 3 GPIO_ACTIVE_LOW>;
 		};
+
+		rfkill {
+		label = "WiFi";
+		linux,code = <KEY_RFKILL>;
+		gpios = <&chipcommon 16 GPIO_ACTIVE_LOW>;
+		};
+
+		reset {
+		label = "Reset";
+		linux,code = <KEY_RESTART>;
+		gpios = <&chipcommon 17 GPIO_ACTIVE_LOW>;
+		};
 	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		wps {
+		label = "bcm53xx:white:wps";
+		gpios = <&chipcommon 22 GPIO_ACTIVE_LOW>;
+		};
+
+		usb2 {
+		label = "bcm53xx:green:usb2";
+		gpios = <&chipcommon 1 GPIO_ACTIVE_LOW>;
+		};
+
+		usb3 {
+		label = "bcm53xx:green:usb3";
+		gpios = <&chipcommon 2 GPIO_ACTIVE_LOW>;
+		};
+
+		power {
+		label = "bcm53xx:white:power";
+		gpios = <&chipcommon 4 GPIO_ACTIVE_HIGH>;
+		};
+
+		wifi-disabled {
+		label = "bcm53xx:amber:wifi-disabled";
+		gpios = <&chipcommon 0 GPIO_ACTIVE_LOW>;
+		};
+
+		wifi-enabled {
+		label = "bcm53xx:white:wifi-enabled";
+		gpios = <&chipcommon 5 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar1 {
+		label = "bcm53xx:white:bluebar1";
+		gpios = <&chipcommon 11 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar2 {
+		label = "bcm53xx:white:bluebar2";
+		gpios = <&chipcommon 12 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar3 {
+		label = "bcm53xx:white:bluebar3";
+		gpios = <&chipcommon 15 GPIO_ACTIVE_LOW>;
+		};
+
+		bluebar4 {
+		label = "bcm53xx:white:bluebar4";
+		gpios = <&chipcommon 18 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar5 {
+		label = "bcm53xx:white:bluebar5";
+		gpios = <&chipcommon 19 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar6 {
+		label = "bcm53xx:white:bluebar6";
+		gpios = <&chipcommon 20 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar7 {
+		label = "bcm53xx:white:bluebar7";
+		gpios = <&chipcommon 21 GPIO_ACTIVE_HIGH>;
+		};
+
+		bluebar8 {
+		label = "bcm53xx:white:bluebar8";
+		gpios = <&chipcommon 8 GPIO_ACTIVE_HIGH>;
+		};
+
+	};
+};
+
+&usb2 {
+	vcc-gpio = <&chipcommon 13 GPIO_ACTIVE_HIGH>;
+};
+
+&usb3 {
+	vcc-gpio = <&chipcommon 14 GPIO_ACTIVE_HIGH>;
 };
